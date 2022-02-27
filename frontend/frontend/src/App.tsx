@@ -37,6 +37,8 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    if (selectedCountry === "") return;
+
     const asyncFetch = async () => {
       const newCities = await fetchCountryCities(selectedCountry);
 
@@ -46,7 +48,13 @@ const App = () => {
     asyncFetch();
   }, [selectedCountry]);
 
-  const handleClick = (country: string) => {
+  const handleOnAllCitiesClick = async () => {
+    const newCities = await fetchAllCities();
+    setCities(newCities);
+    setSelectedCountry("");
+  };
+
+  const handleOnCountryClick = (country: string) => {
     setSelectedCountry(country);
   };
 
@@ -54,12 +62,13 @@ const App = () => {
     <div className="App">
       <Sidebar>
         <div style={{ display: "flex", flexDirection: "column" }}>
+          <button onClick={handleOnAllCitiesClick}>All cities</button>
           {countries?.map((country) => (
             <Country
               key={country.name}
               name={country.name}
               citiesNumber={country.count}
-              onClick={() => handleClick(country.name)}
+              onClick={() => handleOnCountryClick(country.name)}
               isSelected={country.name === selectedCountry}
             />
           ))}
