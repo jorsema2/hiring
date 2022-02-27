@@ -1,5 +1,4 @@
 import "./Table.css";
-import { useEffect, useState } from "react";
 import { City } from "./City/City";
 
 type CityProps = {
@@ -9,15 +8,9 @@ type CityProps = {
   geonameid?: number;
 };
 
-export const Table = () => {
-  const [cities, setCities] = useState<CityProps[] | null>(null);
+type CitiesProps = { cities: CityProps[] | null };
 
-  useEffect(() => {
-    fetch("http://localhost:3001/api/cities")
-      .then((response) => response.json())
-      .then(setCities);
-  }, []);
-
+export const Table = ({ cities }: CitiesProps) => {
   return (
     <div id="cities-table-wrapper">
       <table>

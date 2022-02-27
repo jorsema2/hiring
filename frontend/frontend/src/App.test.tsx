@@ -1,8 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
 
-test("renders sidebar title", () => {
-  render(<App />);
-  const sidebarTitle = screen.getByText(/cities app/i);
-  expect(sidebarTitle).toBeInTheDocument();
+describe("App", () => {
+  it("renders sidebar title", async () => {
+    render(<App />);
+
+    const sidebarTitle = await screen.findByText(/cities app/i);
+
+    expect(sidebarTitle).toBeInTheDocument();
+  });
 });

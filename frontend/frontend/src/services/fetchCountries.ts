@@ -7,3 +7,5 @@ export const fetchCountries = () => {
 
   return data;
 };
+
+export default fetchCountries;
