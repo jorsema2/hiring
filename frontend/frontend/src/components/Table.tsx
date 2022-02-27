@@ -12,7 +12,7 @@ type CitiesProps = { cities: CityProps[] | null };
 
 export const Table = ({ cities }: CitiesProps) => {
   return (
-    <div id="cities-table-wrapper">
+    <div className="cities-list">
       <table>
         <thead>
           <tr>

@@ -1,7 +1,8 @@
-#cities-table-wrapper {
-  height: 100%;
-  flex-grow: 1;
-  overflow-y: scroll;
+.cities-list {
+  height: 600px;
+  width: 70%;
+
+  overflow-y: auto;
 }
 
 table {
