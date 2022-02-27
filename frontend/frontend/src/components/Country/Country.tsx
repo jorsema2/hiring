@@ -1,3 +1,5 @@
+import "./Country.css";
+
 type CountryProps = {
   name: string;
   citiesNumber: number;
@@ -16,7 +18,7 @@ export const Country = ({
   };
 
   return (
-    <button style={background} onClick={onClick}>
+    <button className="country" style={background} onClick={onClick}>
       {name}, ({citiesNumber})
     </button>
   );

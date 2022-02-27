@@ -60,6 +60,21 @@ describe("Country", () => {
     expect(screen.getByText(/48/i)).toHaveStyle("background-color: yellow");
   });
 
+  test("renders with transparent background if isSelected is false", () => {
+    render(
+      <Country
+        name={FAKE_COUNTRY.name}
+        citiesNumber={FAKE_COUNTRY.count}
+        isSelected={false}
+        onClick={callback}
+      />
+    );
+
+    expect(screen.getByText(/48/i)).toHaveStyle(
+      "background-color: transparent"
+    );
+  });
+
   test("calls onClick callback when user clicks on it", () => {
     render(
       <Country

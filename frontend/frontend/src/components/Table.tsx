@@ -26,9 +26,18 @@ export const Table = () => {
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td>Name</td>
+            <td>Country</td>
+            <td>Subcountry</td>
+            <td>Geonameid</td>
+          </tr>
           {cities?.map((city, index) => (
             <tr key={index}>
               <td>{city.name}</td>
+              <td>{city.country}</td>
+              <td>{city.subcountry}</td>
+              <td>{city.geonameid}</td>
             </tr>
           ))}
         </tbody>
