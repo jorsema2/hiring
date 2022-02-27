@@ -1,7 +1,8 @@
 import "./Table.css";
 import { useEffect, useState } from "react";
+import { City } from "./City/City";
 
-type City = {
+type CityProps = {
   name: string;
   country?: string;
   subcountry?: string;
@@ -9,7 +10,7 @@ type City = {
 };
 
 export const Table = () => {
-  const [cities, setCities] = useState<City[] | null>(null);
+  const [cities, setCities] = useState<CityProps[] | null>(null);
 
   useEffect(() => {
     fetch("http://localhost:3001/api/cities")
@@ -29,16 +30,17 @@ export const Table = () => {
           <tr>
             <td>Name</td>
             <td>Country</td>
-            <td>Subcountry</td>
-            <td>Geonameid</td>
+            <td>Sub-country</td>
+            <td>Geoname page</td>
           </tr>
           {cities?.map((city, index) => (
-            <tr key={index}>
-              <td>{city.name}</td>
-              <td>{city.country}</td>
-              <td>{city.subcountry}</td>
-              <td>{city.geonameid}</td>
-            </tr>
+            <City
+              key={index}
+              name={city.name}
+              country={city.country}
+              subCountry={city.subcountry}
+              geoNameId={city.geonameid}
+            />
           ))}
         </tbody>
       </table>

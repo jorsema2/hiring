@@ -10,7 +10,7 @@ const FAKE_COUNTRY = {
 };
 
 describe("Country", () => {
-  test("renders country name passed by prop", () => {
+  it("renders country name passed by prop", () => {
     render(
       <Country
         name={FAKE_COUNTRY.name}
@@ -22,7 +22,7 @@ describe("Country", () => {
     expect(screen.getByText(/afghanistan/i));
   });
 
-  test("renders number of cities passed by prop", () => {
+  it("renders number of cities passed by prop", () => {
     render(
       <Country
         name={FAKE_COUNTRY.name}
@@ -34,7 +34,7 @@ describe("Country", () => {
     expect(screen.getByText(/48/i));
   });
 
-  test("renders with orange background if isSelected is true", () => {
+  it("renders with orange background if isSelected is true", () => {
     render(
       <Country
         name={FAKE_COUNTRY.name}
@@ -47,20 +47,7 @@ describe("Country", () => {
     expect(screen.getByText(/48/i)).toHaveStyle("background-color: yellow");
   });
 
-  test("renders with orange background if isSelected is true", () => {
-    render(
-      <Country
-        name={FAKE_COUNTRY.name}
-        citiesNumber={FAKE_COUNTRY.count}
-        isSelected
-        onClick={callback}
-      />
-    );
-
-    expect(screen.getByText(/48/i)).toHaveStyle("background-color: yellow");
-  });
-
-  test("renders with transparent background if isSelected is false", () => {
+  it("renders with transparent background if isSelected is false", () => {
     render(
       <Country
         name={FAKE_COUNTRY.name}
@@ -75,7 +62,7 @@ describe("Country", () => {
     );
   });
 
-  test("calls onClick callback when user clicks on it", () => {
+  it("calls onClick callback when user clicks on it", () => {
     render(
       <Country
         name={FAKE_COUNTRY.name}

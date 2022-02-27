@@ -1,10 +1,25 @@
 type CityProps = {
   name: string;
   country?: string;
-  subcountry?: string;
-  geonameid?: number;
+  subCountry?: string;
+  geoNameId?: number;
 };
 
-export const City = ({ name }: CityProps) => {
-  return <div>{name}</div>;
+export const City = ({ name, country, subCountry, geoNameId }: CityProps) => {
+  return (
+    <tr>
+      <td>{name}</td>
+      <td>{country}</td>
+      <td>{subCountry}</td>
+      <td>
+        <a
+          href={`https://www.geonames.org/${geoNameId}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {geoNameId}
+        </a>
+      </td>
+    </tr>
+  );
 };
