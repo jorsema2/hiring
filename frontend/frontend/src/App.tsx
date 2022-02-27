@@ -2,34 +2,49 @@ import "./App.css";
 import { Table } from "./components/Table";
 import { Sidebar } from "./components/Sidebar";
 import { Country } from "./components/Country/Country";
+import { fetchCountries } from "./services/fetchCountries";
+import { useState, useEffect } from "react";
 
-const FAKE_COUNTRY = {
-  name: "Afghanistan",
-  count: 48,
+type CountryProps = {
+  name: string;
+  count: number;
 };
 
-const handleClick = () => {
-  console.log("clicked");
-};
+const App = () => {
+  const [countries, setCountries] = useState<CountryProps[] | null>([]);
+  const [selectedCountry, setSelectedCountry] = useState<string>("");
 
-function App() {
+  useEffect(() => {
+    const asyncFetch = async () => {
+      const newCountries = await fetchCountries();
+      setCountries(newCountries);
+    };
+
+    asyncFetch();
+  }, []);
+
+  const handleClick = (country: string) => {
+    setSelectedCountry(country);
+  };
+
   return (
     <div className="App">
-      <Sidebar />
-      <Country
-        name={FAKE_COUNTRY.name}
-        citiesNumber={FAKE_COUNTRY.count}
-        onClick={handleClick}
-      />
-      <Country
-        name={FAKE_COUNTRY.name}
-        citiesNumber={FAKE_COUNTRY.count}
-        isSelected
-        onClick={handleClick}
-      />
+      <Sidebar>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {countries?.map((country) => (
+            <Country
+              key={country.name}
+              name={country.name}
+              citiesNumber={country.count}
+              onClick={() => handleClick(country.name)}
+              isSelected={country.name === selectedCountry}
+            />
+          ))}
+        </div>
+      </Sidebar>
       <Table />
     </div>
   );
-}
+};
 
 export default App;
