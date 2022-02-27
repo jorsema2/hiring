@@ -4,7 +4,6 @@ export const fetchAllCities = () => {
     .then((response) => {
       return response;
     });
-  console.log(data);
   return data;
 };
 
