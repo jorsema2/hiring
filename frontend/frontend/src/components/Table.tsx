@@ -14,16 +14,7 @@ type CitiesProps = {
   handleScroll: (event: UIEvent<HTMLDivElement>) => void;
 };
 
-const handleScroll = (e: any) => {
-  const isScrollAtBottom =
-    e.target.scrollHeight - Math.ceil(e.target.scrollTop) ===
-    e.target.clientHeight;
-  if (isScrollAtBottom) {
-    console.log("I arrived");
-  }
-};
-
-export const Table = ({ cities }: CitiesProps) => {
+export const Table = ({ cities, handleScroll }: CitiesProps) => {
   return (
     <div className="cities-list" onScroll={handleScroll}>
       <table>

@@ -19,13 +19,12 @@ type CityProps = {
   geoNameId?: number;
 };
 
-const newCitiesPerFetch: number = 25;
+const citiesPerPage = 50;
 
 const App = () => {
   const [countries, setCountries] = useState<CountryProps[] | null>([]);
   const [cities, setCities] = useState<CityProps[] | null>([]);
   const [selectedCountry, setSelectedCountry] = useState<string>("");
-  const [citiesShownNumber, setCitiesShownNumber] = useState<number>(25);
 
   useEffect(() => {
     const asyncFetch = async () => {
@@ -43,7 +42,11 @@ const App = () => {
     if (selectedCountry === "") return;
 
     const asyncFetch = async () => {
-      const newCities = await fetchCountryCities(selectedCountry);
+      const newCities = await fetchCountryCities(
+        selectedCountry,
+        cities?.length,
+        citiesPerPage
+      );
 
       setCities(newCities);
     };
@@ -52,21 +55,39 @@ const App = () => {
   }, [selectedCountry]);
 
   const handleOnAllCitiesClick = async () => {
+    setCities([]);
+
     const newCities = await fetchAllCities();
     setCities(newCities);
     setSelectedCountry("");
   };
 
   const handleOnCountryClick = (country: string) => {
+    setCities([]);
+
     setSelectedCountry(country);
   };
+  console.log(cities);
 
-  const handleTableScroll = (e: UIEvent<HTMLDivElement>) => {
+  const handleTableScroll = async (e: UIEvent<HTMLDivElement>) => {
     const isScrollAtBottom =
-      e.currentTarget.scrollHeight - Math.ceil(e.currentTarget.scrollTop) ===
+      e.currentTarget.scrollHeight - Math.ceil(e.currentTarget.scrollTop) <=
       e.currentTarget.clientHeight;
     if (isScrollAtBottom) {
       console.log("I arrived");
+      if (selectedCountry === "") {
+        // TODO
+      } else {
+        console.log("I fetched");
+        const newCities = await fetchCountryCities(
+          selectedCountry,
+          cities?.length,
+          citiesPerPage
+        );
+        console.log(newCities);
+
+        setCities((cities) => (cities ? [...cities, ...newCities] : cities));
+      }
     }
   };
 
