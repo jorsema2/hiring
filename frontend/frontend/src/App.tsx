@@ -19,10 +19,13 @@ type CityProps = {
   geoNameId?: number;
 };
 
+const newCitiesPerFetch = 25;
+
 const App = () => {
   const [countries, setCountries] = useState<CountryProps[] | null>([]);
   const [cities, setCities] = useState<CityProps[] | null>([]);
   const [selectedCountry, setSelectedCountry] = useState<string>("");
+  const [citiesShownNumber, setCitiesShownNumber] = useState<number>(25);
 
   useEffect(() => {
     const asyncFetch = async () => {

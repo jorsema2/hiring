@@ -10,9 +10,18 @@ type CityProps = {
 
 type CitiesProps = { cities: CityProps[] | null };
 
+const handleScroll = (e: any) => {
+  const isScrollAtBottom =
+    e.target.scrollHeight - Math.ceil(e.target.scrollTop) ===
+    e.target.clientHeight;
+  if (isScrollAtBottom) {
+    console.log("I arrived");
+  }
+};
+
 export const Table = ({ cities }: CitiesProps) => {
   return (
-    <div className="cities-list">
+    <div className="cities-list" onScroll={handleScroll}>
       <table>
         <thead>
           <tr>
