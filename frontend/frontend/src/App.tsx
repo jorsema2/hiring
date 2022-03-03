@@ -4,7 +4,7 @@ import { Sidebar } from "./components/Sidebar";
 import { Country } from "./components/Country/Country";
 import fetchCountries from "./services/fetchCountries";
 import fetchCountryCities from "./services/fetchCountryCities";
-import { useState, useEffect } from "react";
+import { useState, useEffect, UIEvent } from "react";
 import fetchAllCities from "./services/fetchAllCities";
 
 type CountryProps = {
@@ -19,7 +19,7 @@ type CityProps = {
   geoNameId?: number;
 };
 
-const newCitiesPerFetch = 25;
+const newCitiesPerFetch: number = 25;
 
 const App = () => {
   const [countries, setCountries] = useState<CountryProps[] | null>([]);
@@ -61,6 +61,15 @@ const App = () => {
     setSelectedCountry(country);
   };
 
+  const handleTableScroll = (e: UIEvent<HTMLDivElement>) => {
+    const isScrollAtBottom =
+      e.currentTarget.scrollHeight - Math.ceil(e.currentTarget.scrollTop) ===
+      e.currentTarget.clientHeight;
+    if (isScrollAtBottom) {
+      console.log("I arrived");
+    }
+  };
+
   return (
     <div className="App">
       <Sidebar>
@@ -77,7 +86,7 @@ const App = () => {
           ))}
         </div>
       </Sidebar>
-      <Table cities={cities} />
+      <Table cities={cities} handleScroll={handleTableScroll} />
     </div>
   );
 };

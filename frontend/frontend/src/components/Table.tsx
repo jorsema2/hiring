@@ -1,5 +1,6 @@
 import "./Table.css";
 import { City } from "./City/City";
+import { UIEvent } from "react";
 
 type CityProps = {
   name: string;
@@ -8,7 +9,10 @@ type CityProps = {
   geonameid?: number;
 };
 
-type CitiesProps = { cities: CityProps[] | null };
+type CitiesProps = {
+  cities: CityProps[] | null;
+  handleScroll: (event: UIEvent<HTMLDivElement>) => void;
+};
 
 const handleScroll = (e: any) => {
   const isScrollAtBottom =
