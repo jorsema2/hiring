@@ -74,17 +74,14 @@ const App = () => {
       e.currentTarget.scrollHeight - Math.ceil(e.currentTarget.scrollTop) <=
       e.currentTarget.clientHeight;
     if (isScrollAtBottom) {
-      console.log("I arrived");
       if (selectedCountry === "") {
         // TODO
       } else {
-        console.log("I fetched");
         const newCities = await fetchCountryCities(
           selectedCountry,
           cities?.length,
           citiesPerPage
         );
-        console.log(newCities);
 
         setCities((cities) => (cities ? [...cities, ...newCities] : cities));
       }
