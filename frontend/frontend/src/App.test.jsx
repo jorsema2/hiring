@@ -1,13 +1,17 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import App from "./App";
 import generateCountriesMother from "./test/mothers/generateCountriesMother";
+import generateCitiesMother from "./test/mothers/generateCitiesMother";
 import fetchCountries from "./services/fetchCountries";
+import fetchCountryCities from "./services/fetchCountryCities";
 
 jest.mock("./services/fetchCountries");
 jest.mock("./services/fetchCountryCities");
 jest.mock("./services/fetchUnfilteredCities");
 
 const COUNTRIES = generateCountriesMother();
+const CITIES = generateCitiesMother();
 
 describe("App", () => {
   it("renders its title", async () => {
@@ -27,5 +31,24 @@ describe("App", () => {
 
     expect(firstCountry).toBeInTheDocument();
     expect(secondCountry).toBeInTheDocument();
+  });
+
+  it("country changes background color when it is clicked and fetcbes cities of that country", async () => {
+    fetchCountries.mockResolvedValue(COUNTRIES);
+    fetchCountryCities.mockResolvedValue(CITIES);
+
+    render(<App />);
+
+    const country = await screen.findByText(/andorra/i);
+
+    expect(country).toBeInTheDocument();
+
+    userEvent.click(country);
+
+    const city = await screen.findByText(/les escaldes/i);
+
+    expect(country).toHaveStyle("background-color: yellow");
+
+    expect(city).toBeInTheDocument();
   });
 });
