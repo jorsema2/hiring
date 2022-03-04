@@ -6,17 +6,11 @@ import fetchCountries from "./services/fetchCountries";
 import fetchCountryCities from "./services/fetchCountryCities";
 import { useState, useEffect, UIEvent } from "react";
 import fetchUnfilteredCities from "./services/fetchUnfilteredCities";
+import CityProps from "./types/types";
 
 type CountryProps = {
   name: string;
   count: number;
-};
-
-type CityProps = {
-  name: string;
-  country?: string;
-  subCountry?: string;
-  geoNameId?: number;
 };
 
 const citiesPerPage = 50;

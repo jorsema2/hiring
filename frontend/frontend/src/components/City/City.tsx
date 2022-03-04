@@ -1,9 +1,4 @@
-type CityProps = {
-  name: string;
-  country?: string;
-  subCountry?: string;
-  geoNameId?: number;
-};
+import CityProps from "../../types/types";
 
 const City = ({ name, country, subCountry, geoNameId }: CityProps) => {
   return (

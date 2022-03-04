@@ -12,7 +12,7 @@ const FAKE_CITY = {
   subcountry: "Escaldes-Engordany",
 };
 
-const RowWrapper = ({ children }: WrapperProps) => {
+const Wrapper = ({ children }: WrapperProps) => {
   return (
     <table>
       <tbody>{children}</tbody>
@@ -23,9 +23,9 @@ const RowWrapper = ({ children }: WrapperProps) => {
 describe("City", () => {
   it("renders city name passed by prop", () => {
     render(
-      <RowWrapper>
+      <Wrapper>
         <City name={FAKE_CITY.name} />
-      </RowWrapper>
+      </Wrapper>
     );
 
     const cityName = screen.getByText(/les Escaldes/i);
@@ -35,9 +35,9 @@ describe("City", () => {
 
   it("renders country name passed by prop", () => {
     render(
-      <RowWrapper>
+      <Wrapper>
         <City name={FAKE_CITY.name} country={FAKE_CITY.country} />
-      </RowWrapper>
+      </Wrapper>
     );
 
     const countryName = screen.getByText(/Andorra/i);
@@ -47,9 +47,9 @@ describe("City", () => {
 
   it("renders geonameid passed by prop", () => {
     render(
-      <RowWrapper>
+      <Wrapper>
         <City name={FAKE_CITY.name} geoNameId={FAKE_CITY.geonameid} />
-      </RowWrapper>
+      </Wrapper>
     );
 
     const geonameId = screen.getByText(/3040051/i);
@@ -59,9 +59,9 @@ describe("City", () => {
 
   it("renders subcountry passed by prop", () => {
     render(
-      <RowWrapper>
+      <Wrapper>
         <City name={FAKE_CITY.name} subCountry={FAKE_CITY.subcountry} />
-      </RowWrapper>
+      </Wrapper>
     );
 
     const subCountry = screen.getByText(/Escaldes-Engordany/i);
@@ -71,9 +71,9 @@ describe("City", () => {
 
   it("renders geonameid as a link", () => {
     render(
-      <RowWrapper>
+      <Wrapper>
         <City name={FAKE_CITY.name} geoNameId={FAKE_CITY.geonameid} />
-      </RowWrapper>
+      </Wrapper>
     );
 
     const geonameId = screen.getByText(/3040051/i);

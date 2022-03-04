@@ -29,9 +29,9 @@ const CitiesTable = ({ cities, handleScroll }: CitiesProps) => {
             </tr>
           </thead>
           <tbody>
-            {cities?.map((city, index) => (
+            {cities?.map((city) => (
               <City
-                key={index}
+                key={city.geonameid}
                 name={city.name}
                 country={city.country}
                 subCountry={city.subcountry}
