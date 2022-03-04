@@ -41,7 +41,7 @@ const App = () => {
   useEffect(() => {
     if (selectedCountry === "") return;
 
-    const fetchCountryFirstCities = async () => {
+    const fetchInitialCountryCities = async () => {
       const newCities = await fetchCountryCities(
         selectedCountry,
         0,
@@ -51,7 +51,7 @@ const App = () => {
       setCities(newCities);
     };
 
-    fetchCountryFirstCities();
+    fetchInitialCountryCities();
   }, [selectedCountry]);
 
   const handleOnAllCitiesClick = async () => {
@@ -72,28 +72,25 @@ const App = () => {
     const isScrollAtBottom =
       e.currentTarget.scrollHeight - Math.ceil(e.currentTarget.scrollTop) <=
       e.currentTarget.clientHeight;
-    if (isScrollAtBottom) {
-      if (selectedCountry === "") {
-        const newCities = await fetchUnfilteredCities(
-          cities?.length,
-          citiesPerPage
-        );
 
-        setCities((cities) => (cities ? [...cities, ...newCities] : cities));
-      } else {
-        const newCities = await fetchCountryCities(
-          selectedCountry,
-          cities?.length,
-          citiesPerPage
-        );
+    if (!isScrollAtBottom) return;
 
-        setCities((cities) => (cities ? [...cities, ...newCities] : cities));
-      }
+    let newCities: [];
+
+    if (selectedCountry === "") {
+      newCities = await fetchUnfilteredCities(cities?.length, citiesPerPage);
+    } else {
+      newCities = await fetchCountryCities(
+        selectedCountry,
+        cities?.length,
+        citiesPerPage
+      );
     }
+    setCities((cities) => (cities ? [...cities, ...newCities] : cities));
   };
 
   return (
-    <div className="App">
+    <div className="app">
       <h2>Cities App</h2>
       <div className="lists">
         <Sidebar>
