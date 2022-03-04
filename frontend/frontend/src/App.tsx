@@ -41,12 +41,10 @@ const App = () => {
   useEffect(() => {
     if (selectedCountry === "") return;
 
-    const lastCityIndex = cities?.length ? cities?.length - 1 : 0;
-
     const asyncFetch = async () => {
       const newCities = await fetchCountryCities(
         selectedCountry,
-        lastCityIndex,
+        0,
         citiesPerPage
       );
 
@@ -75,6 +73,8 @@ const App = () => {
       e.currentTarget.scrollHeight - Math.ceil(e.currentTarget.scrollTop) <=
       e.currentTarget.clientHeight;
     if (isScrollAtBottom) {
+      const lastCityIndex = cities?.length ? cities?.length - 1 : 0;
+      console.log(lastCityIndex);
       if (selectedCountry === "") {
         // TODO
       } else {
