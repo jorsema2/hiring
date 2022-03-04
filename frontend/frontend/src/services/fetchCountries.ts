@@ -1,4 +1,4 @@
-export const fetchCountries = () => {
+const fetchCountries = () => {
   const data = fetch("http://localhost:3001/api/countries")
     .then((response) => response.json())
     .then((response) => {

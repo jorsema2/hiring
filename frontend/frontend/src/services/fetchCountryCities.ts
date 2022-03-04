@@ -1,4 +1,4 @@
-export const fetchCountryCities = (
+const fetchCountryCities = (
   country: string,
   lastCityIndex: number = 0,
   citiesPerPage: number

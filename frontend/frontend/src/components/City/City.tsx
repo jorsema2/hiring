@@ -5,7 +5,7 @@ type CityProps = {
   geoNameId?: number;
 };
 
-export const City = ({ name, country, subCountry, geoNameId }: CityProps) => {
+const City = ({ name, country, subCountry, geoNameId }: CityProps) => {
   return (
     <tr>
       <td>{name}</td>
@@ -23,3 +23,5 @@ export const City = ({ name, country, subCountry, geoNameId }: CityProps) => {
     </tr>
   );
 };
+
+export default City;

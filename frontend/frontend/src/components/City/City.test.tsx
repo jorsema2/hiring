@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { City } from "./City";
+import City from "./City";
 
 type WrapperProps = {
   children: React.ReactNode;

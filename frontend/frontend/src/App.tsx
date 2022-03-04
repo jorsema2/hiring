@@ -1,7 +1,7 @@
 import "./App.css";
-import { CitiesTable } from "./components/CitiesTable/CitiesTable";
-import { Sidebar } from "./components/Sidebar/Sidebar";
-import { Country } from "./components/Country/Country";
+import CitiesTable from "./components/CitiesTable/CitiesTable";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Country from "./components/Country/Country";
 import fetchCountries from "./services/fetchCountries";
 import fetchCountryCities from "./services/fetchCountryCities";
 import { useState, useEffect, UIEvent } from "react";

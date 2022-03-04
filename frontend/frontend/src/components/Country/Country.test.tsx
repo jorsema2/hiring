@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Country } from "./Country";
+import Country from "./Country";
 
 const callback = jest.fn();
 

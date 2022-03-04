@@ -4,7 +4,7 @@ type SidebarProps = {
   children: React.ReactNode;
 };
 
-export const Sidebar = ({ children }: SidebarProps) => {
+const Sidebar = ({ children }: SidebarProps) => {
   return (
     <div className="sidebar">
       <h3>Countries</h3>
@@ -12,3 +12,5 @@ export const Sidebar = ({ children }: SidebarProps) => {
     </div>
   );
 };
+
+export default Sidebar;

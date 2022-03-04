@@ -1,4 +1,4 @@
-export const generateCountriesMother = () => {
+const generateCountriesMother = () => {
   return [
     {
       name: "Afghanistan",
@@ -978,3 +978,5 @@ export const generateCountriesMother = () => {
     },
   ];
 };
+
+export default generateCountriesMother;

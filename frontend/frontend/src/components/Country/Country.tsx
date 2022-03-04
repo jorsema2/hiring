@@ -7,12 +7,7 @@ type CountryProps = {
   onClick: () => void;
 };
 
-export const Country = ({
-  name,
-  citiesNumber,
-  isSelected,
-  onClick,
-}: CountryProps) => {
+const Country = ({ name, citiesNumber, isSelected, onClick }: CountryProps) => {
   const background = {
     backgroundColor: isSelected ? "yellow" : "transparent",
   };
@@ -23,3 +18,5 @@ export const Country = ({
     </button>
   );
 };
+
+export default Country;

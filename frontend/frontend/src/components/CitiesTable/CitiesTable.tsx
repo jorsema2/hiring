@@ -1,5 +1,5 @@
 import "./CitiesTable.css";
-import { City } from "../City/City";
+import City from "../City/City";
 import { UIEvent } from "react";
 
 type CityProps = {
@@ -14,7 +14,7 @@ type CitiesProps = {
   handleScroll: (event: UIEvent<HTMLDivElement>) => void;
 };
 
-export const CitiesTable = ({ cities, handleScroll }: CitiesProps) => {
+const CitiesTable = ({ cities, handleScroll }: CitiesProps) => {
   return (
     <div className="container">
       <h3>Cities</h3>
@@ -44,3 +44,5 @@ export const CitiesTable = ({ cities, handleScroll }: CitiesProps) => {
     </div>
   );
 };
+
+export default CitiesTable;

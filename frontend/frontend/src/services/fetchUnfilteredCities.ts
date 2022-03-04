@@ -1,4 +1,4 @@
-export const fetchUnfilteredCities = (
+const fetchUnfilteredCities = (
   lastCityIndex: number = 0,
   citiesPerPage: number
 ) => {
