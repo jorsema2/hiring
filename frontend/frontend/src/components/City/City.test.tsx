@@ -28,7 +28,9 @@ describe("City", () => {
       </RowWrapper>
     );
 
-    expect(screen.getByText(/les Escaldes/i));
+    const cityName = screen.getByText(/les Escaldes/i);
+
+    expect(cityName).toBeInTheDocument();
   });
 
   it("renders country name passed by prop", () => {
@@ -38,7 +40,9 @@ describe("City", () => {
       </RowWrapper>
     );
 
-    expect(screen.getByText(/Andorra/i));
+    const countryName = screen.getByText(/Andorra/i);
+
+    expect(countryName).toBeInTheDocument();
   });
 
   it("renders geonameid passed by prop", () => {
@@ -48,20 +52,9 @@ describe("City", () => {
       </RowWrapper>
     );
 
-    expect(screen.getByText(/3040051/i));
-  });
+    const geonameId = screen.getByText(/3040051/i);
 
-  it("renders geonameid as a link", () => {
-    render(
-      <RowWrapper>
-        <City name={FAKE_CITY.name} geoNameId={FAKE_CITY.geonameid} />
-      </RowWrapper>
-    );
-
-    expect(screen.getByText(/3040051/i)).toHaveAttribute(
-      "href",
-      `https://www.geonames.org/${FAKE_CITY.geonameid}`
-    );
+    expect(geonameId).toBeInTheDocument();
   });
 
   it("renders subcountry passed by prop", () => {
@@ -71,6 +64,23 @@ describe("City", () => {
       </RowWrapper>
     );
 
-    expect(screen.getByText(/Escaldes-Engordany/i));
+    const subCountry = screen.getByText(/Escaldes-Engordany/i);
+
+    expect(subCountry).toBeInTheDocument();
+  });
+
+  it("renders geonameid as a link", () => {
+    render(
+      <RowWrapper>
+        <City name={FAKE_CITY.name} geoNameId={FAKE_CITY.geonameid} />
+      </RowWrapper>
+    );
+
+    const geonameId = screen.getByText(/3040051/i);
+
+    expect(geonameId).toHaveAttribute(
+      "href",
+      `https://www.geonames.org/${FAKE_CITY.geonameid}`
+    );
   });
 });

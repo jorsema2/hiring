@@ -19,7 +19,9 @@ describe("Country", () => {
       />
     );
 
-    expect(screen.getByText(/afghanistan/i));
+    const country = screen.getByText(/afghanistan/i);
+
+    expect(country).toBeInTheDocument();
   });
 
   it("renders number of cities passed by prop", () => {
@@ -31,7 +33,9 @@ describe("Country", () => {
       />
     );
 
-    expect(screen.getByText(/48/i));
+    const citiesNumber = screen.getByText(/48/i);
+
+    expect(citiesNumber).toBeInTheDocument();
   });
 
   it("renders with orange background if isSelected is true", () => {
@@ -44,7 +48,9 @@ describe("Country", () => {
       />
     );
 
-    expect(screen.getByText(/48/i)).toHaveStyle("background-color: yellow");
+    const country = screen.getByText(/afghanistan/i);
+
+    expect(country).toHaveStyle("background-color: yellow");
   });
 
   it("renders with transparent background if isSelected is false", () => {
@@ -72,7 +78,9 @@ describe("Country", () => {
       />
     );
 
-    userEvent.click(screen.getByText(/afghanistan/i));
+    const country = screen.getByText(/afghanistan/i);
+
+    userEvent.click(country);
 
     expect(callback).toHaveBeenCalled();
   });
