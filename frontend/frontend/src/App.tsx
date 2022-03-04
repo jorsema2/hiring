@@ -27,7 +27,7 @@ const App = () => {
   const [selectedCountry, setSelectedCountry] = useState<string>("");
 
   useEffect(() => {
-    const asyncFetch = async () => {
+    const getInitialData = async () => {
       const newCountries = await fetchCountries();
       setCountries(newCountries);
 
@@ -35,30 +35,31 @@ const App = () => {
       setCities(newCities);
     };
 
-    asyncFetch();
+    getInitialData();
   }, []);
 
   useEffect(() => {
-    if (selectedCountry === "") return;
+    const getNewCities = async () => {
+      if (selectedCountry === "") {
+        const newCities = await fetchUnfilteredCities(0, citiesPerPage);
+        setCities(newCities);
+      } else {
+        const newCities = await fetchCountryCities(
+          selectedCountry,
+          0,
+          citiesPerPage
+        );
 
-    const fetchInitialCountryCities = async () => {
-      const newCities = await fetchCountryCities(
-        selectedCountry,
-        0,
-        citiesPerPage
-      );
-
-      setCities(newCities);
+        setCities(newCities);
+      }
     };
 
-    fetchInitialCountryCities();
+    getNewCities();
   }, [selectedCountry]);
 
   const handleOnAllCitiesClick = async () => {
     setCities([]);
 
-    const newCities = await fetchUnfilteredCities(0, citiesPerPage);
-    setCities(newCities);
     setSelectedCountry("");
   };
 
