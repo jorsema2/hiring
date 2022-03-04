@@ -1,4 +1,4 @@
-export const fetchAllCities = () => {
+export const fetchUnfilteredCities = () => {
   const data = fetch("http://localhost:3001/api/cities")
     .then((response) => response.json())
     .then((response) => {
@@ -7,4 +7,4 @@ export const fetchAllCities = () => {
   return data;
 };
 
-export default fetchAllCities;
+export default fetchUnfilteredCities;

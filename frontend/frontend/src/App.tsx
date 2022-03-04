@@ -5,7 +5,7 @@ import { Country } from "./components/Country/Country";
 import fetchCountries from "./services/fetchCountries";
 import fetchCountryCities from "./services/fetchCountryCities";
 import { useState, useEffect, UIEvent } from "react";
-import fetchAllCities from "./services/fetchAllCities";
+import fetchUnfilteredCities from "./services/fetchUnfilteredCities";
 
 type CountryProps = {
   name: string;
@@ -31,7 +31,7 @@ const App = () => {
       const newCountries = await fetchCountries();
       setCountries(newCountries);
 
-      const newCities = await fetchAllCities();
+      const newCities = await fetchUnfilteredCities();
       setCities(newCities);
     };
 
@@ -41,10 +41,12 @@ const App = () => {
   useEffect(() => {
     if (selectedCountry === "") return;
 
+    const lastCityIndex = cities?.length ? cities?.length - 1 : 0;
+
     const asyncFetch = async () => {
       const newCities = await fetchCountryCities(
         selectedCountry,
-        cities?.length,
+        lastCityIndex,
         citiesPerPage
       );
 
@@ -57,7 +59,7 @@ const App = () => {
   const handleOnAllCitiesClick = async () => {
     setCities([]);
 
-    const newCities = await fetchAllCities();
+    const newCities = await fetchUnfilteredCities();
     setCities(newCities);
     setSelectedCountry("");
   };
@@ -67,7 +69,6 @@ const App = () => {
 
     setSelectedCountry(country);
   };
-  console.log(cities);
 
   const handleTableScroll = async (e: UIEvent<HTMLDivElement>) => {
     const isScrollAtBottom =
