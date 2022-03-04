@@ -1,5 +1,10 @@
-export const fetchUnfilteredCities = () => {
-  const data = fetch("http://localhost:3001/api/cities")
+export const fetchUnfilteredCities = (
+  lastCityIndex: number = 0,
+  citiesPerPage: number
+) => {
+  const data = fetch(
+    `http://localhost:3001/api/cities?from=${lastCityIndex}&limit=${citiesPerPage}`
+  )
     .then((response) => response.json())
     .then((response) => {
       return response;

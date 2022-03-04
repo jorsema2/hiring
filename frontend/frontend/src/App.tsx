@@ -31,7 +31,7 @@ const App = () => {
       const newCountries = await fetchCountries();
       setCountries(newCountries);
 
-      const newCities = await fetchUnfilteredCities();
+      const newCities = await fetchUnfilteredCities(0, citiesPerPage);
       setCities(newCities);
     };
 
@@ -41,7 +41,7 @@ const App = () => {
   useEffect(() => {
     if (selectedCountry === "") return;
 
-    const asyncFetch = async () => {
+    const fetchCountryFirstCities = async () => {
       const newCities = await fetchCountryCities(
         selectedCountry,
         0,
@@ -51,13 +51,13 @@ const App = () => {
       setCities(newCities);
     };
 
-    asyncFetch();
+    fetchCountryFirstCities();
   }, [selectedCountry]);
 
   const handleOnAllCitiesClick = async () => {
     setCities([]);
 
-    const newCities = await fetchUnfilteredCities();
+    const newCities = await fetchUnfilteredCities(0, citiesPerPage);
     setCities(newCities);
     setSelectedCountry("");
   };
@@ -73,10 +73,13 @@ const App = () => {
       e.currentTarget.scrollHeight - Math.ceil(e.currentTarget.scrollTop) <=
       e.currentTarget.clientHeight;
     if (isScrollAtBottom) {
-      const lastCityIndex = cities?.length ? cities?.length - 1 : 0;
-      console.log(lastCityIndex);
       if (selectedCountry === "") {
-        // TODO
+        const newCities = await fetchUnfilteredCities(
+          cities?.length,
+          citiesPerPage
+        );
+
+        setCities((cities) => (cities ? [...cities, ...newCities] : cities));
       } else {
         const newCities = await fetchCountryCities(
           selectedCountry,
