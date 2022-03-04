@@ -95,18 +95,16 @@ const App = () => {
   return (
     <div className="App">
       <Sidebar>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <button onClick={handleOnAllCitiesClick}>All cities</button>
-          {countries?.map((country) => (
-            <Country
-              key={country.name}
-              name={country.name}
-              citiesNumber={country.count}
-              onClick={() => handleOnCountryClick(country.name)}
-              isSelected={country.name === selectedCountry}
-            />
-          ))}
-        </div>
+        <button onClick={handleOnAllCitiesClick}>All cities</button>
+        {countries?.map((country) => (
+          <Country
+            key={country.name}
+            name={country.name}
+            citiesNumber={country.count}
+            onClick={() => handleOnCountryClick(country.name)}
+            isSelected={country.name === selectedCountry}
+          />
+        ))}
       </Sidebar>
       <Table cities={cities} handleScroll={handleTableScroll} />
     </div>
