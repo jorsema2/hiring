@@ -94,19 +94,22 @@ const App = () => {
 
   return (
     <div className="App">
-      <Sidebar>
-        <button onClick={handleOnAllCitiesClick}>All cities</button>
-        {countries?.map((country) => (
-          <Country
-            key={country.name}
-            name={country.name}
-            citiesNumber={country.count}
-            onClick={() => handleOnCountryClick(country.name)}
-            isSelected={country.name === selectedCountry}
-          />
-        ))}
-      </Sidebar>
-      <Table cities={cities} handleScroll={handleTableScroll} />
+      <h2>Cities App</h2>
+      <div className="lists">
+        <Sidebar>
+          <button onClick={handleOnAllCitiesClick}>All cities</button>
+          {countries?.map((country) => (
+            <Country
+              key={country.name}
+              name={country.name}
+              citiesNumber={country.count}
+              onClick={() => handleOnCountryClick(country.name)}
+              isSelected={country.name === selectedCountry}
+            />
+          ))}
+        </Sidebar>
+        <Table cities={cities} handleScroll={handleTableScroll} />
+      </div>
     </div>
   );
 };

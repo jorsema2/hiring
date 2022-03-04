@@ -19,7 +19,7 @@ export const Country = ({
 
   return (
     <button className="country" style={background} onClick={onClick}>
-      {name}, ({citiesNumber})
+      {name} ({citiesNumber})
     </button>
   );
 };

@@ -1,6 +1,9 @@
+.container {
+  width: 80%;
+}
+
 .cities-list {
-  height: 600px;
-  width: 70%;
+  height: 528px;
 
   overflow-y: auto;
 }

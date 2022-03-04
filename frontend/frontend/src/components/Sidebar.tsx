@@ -7,7 +7,7 @@ type SidebarProps = {
 export const Sidebar = ({ children }: SidebarProps) => {
   return (
     <div className="sidebar">
-      <h2>Cities App</h2>
+      <h3>Countries</h3>
       <div className="countries-list">{children}</div>
     </div>
   );

@@ -1,12 +1,12 @@
 .sidebar {
-  width: 200px;
+  width: 15%;
 }
 
 .countries-list {
   display: flex;
   flex-direction: column;
 
-  height: 600px;
+  height: 528px;
 
   overflow-y: auto;
 }
