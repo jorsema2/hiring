@@ -1,5 +1,5 @@
 import "./App.css";
-import { Table } from "./components/Table/Table";
+import { CitiesTable } from "./components/CitiesTable/CitiesTable";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 import { Country } from "./components/Country/Country";
 import fetchCountries from "./services/fetchCountries";
@@ -108,7 +108,7 @@ const App = () => {
             />
           ))}
         </Sidebar>
-        <Table cities={cities} handleScroll={handleTableScroll} />
+        <CitiesTable cities={cities} handleScroll={handleTableScroll} />
       </div>
     </div>
   );
