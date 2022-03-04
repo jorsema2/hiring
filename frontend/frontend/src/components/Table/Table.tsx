@@ -1,5 +1,5 @@
 import "./Table.css";
-import { City } from "./City/City";
+import { City } from "../City/City";
 import { UIEvent } from "react";
 
 type CityProps = {

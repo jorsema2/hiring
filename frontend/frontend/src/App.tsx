@@ -1,6 +1,6 @@
 import "./App.css";
-import { Table } from "./components/Table";
-import { Sidebar } from "./components/Sidebar";
+import { Table } from "./components/Table/Table";
+import { Sidebar } from "./components/Sidebar/Sidebar";
 import { Country } from "./components/Country/Country";
 import fetchCountries from "./services/fetchCountries";
 import fetchCountryCities from "./services/fetchCountryCities";
