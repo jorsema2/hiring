@@ -7,7 +7,6 @@ import fetchCountryCities from "./services/fetchCountryCities";
 import React, { useState, useEffect, UIEvent } from "react";
 import fetchUnfilteredCities from "./services/fetchUnfilteredCities";
 import CityProps from "./types/types";
-import { debounce } from "lodash";
 
 type CountryProps = {
   name: string;
@@ -88,14 +87,11 @@ const App = () => {
   };
 
   const searchCity = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newCities = await debounce(
-      await fetchCountryCities(
-        selectedCountry,
-        0,
-        citiesPerPage,
-        e.target.value
-      ),
-      200
+    const newCities = await fetchCountryCities(
+      selectedCountry,
+      0,
+      citiesPerPage,
+      e.target.value
     );
 
     setSearchText(e.target.value);
