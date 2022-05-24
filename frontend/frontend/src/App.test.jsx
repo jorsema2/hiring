@@ -8,7 +8,6 @@ import fetchCountryCities from "./services/fetchCountryCities";
 
 jest.mock("./services/fetchCountries");
 jest.mock("./services/fetchCountryCities");
-jest.mock("./services/fetchUnfilteredCities");
 
 const COUNTRIES = generateCountriesMother();
 const CITIES = generateCitiesMother();
@@ -39,7 +38,7 @@ describe("App", () => {
 
     render(<App />);
 
-    const country = await screen.findByText(/andorra/i);
+    const country = await screen.findByText(/anguilla/i);
 
     expect(country).toBeInTheDocument();
 

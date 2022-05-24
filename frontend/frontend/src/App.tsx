@@ -3,9 +3,8 @@ import CitiesTable from "./components/CitiesTable/CitiesTable";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Country from "./components/Country/Country";
 import fetchCountries from "./services/fetchCountries";
-import fetchCountryCities from "./services/fetchCountryCities";
+import fetchCities from "./services/fetchCountryCities";
 import React, { useState, useEffect, UIEvent } from "react";
-import fetchUnfilteredCities from "./services/fetchUnfilteredCities";
 import CityProps from "./types/types";
 
 type CountryProps = {
@@ -26,7 +25,7 @@ const App = () => {
       const newCountries = await fetchCountries();
       setCountries(newCountries);
 
-      const newCities = await fetchUnfilteredCities(0, citiesPerPage);
+      const newCities = await fetchCities(null, 0, citiesPerPage);
       setCities(newCities);
     };
 
@@ -36,14 +35,10 @@ const App = () => {
   useEffect(() => {
     const getNewCities = async () => {
       if (selectedCountry === "") {
-        const newCities = await fetchUnfilteredCities(0, citiesPerPage);
+        const newCities = await fetchCities(null, 0, citiesPerPage);
         setCities(newCities);
       } else {
-        const newCities = await fetchCountryCities(
-          selectedCountry,
-          0,
-          citiesPerPage
-        );
+        const newCities = await fetchCities(selectedCountry, 0, citiesPerPage);
 
         setCities(newCities);
       }
@@ -74,9 +69,9 @@ const App = () => {
     let newCities: [];
 
     if (selectedCountry === "") {
-      newCities = await fetchUnfilteredCities(cities?.length, citiesPerPage);
+      newCities = await fetchCities(null, cities?.length, citiesPerPage);
     } else {
-      newCities = await fetchCountryCities(
+      newCities = await fetchCities(
         selectedCountry,
         cities?.length,
         citiesPerPage,
@@ -87,7 +82,7 @@ const App = () => {
   };
 
   const searchCity = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newCities = await fetchCountryCities(
+    const newCities = await fetchCities(
       selectedCountry ?? null,
       0,
       citiesPerPage,
