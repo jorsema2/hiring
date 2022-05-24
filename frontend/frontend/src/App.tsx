@@ -12,7 +12,8 @@ type CountryProps = {
   count: number;
 };
 
-const citiesPerPage = 50;
+const FIRST_CITY_INDEX = 0;
+const CITIES_PER_PAGE = 50;
 
 const App = () => {
   const [countries, setCountries] = useState<CountryProps[] | null>([]);
@@ -25,38 +26,28 @@ const App = () => {
       const newCountries = await fetchCountries();
       setCountries(newCountries);
 
-      const newCities = await fetchCities(null, 0, citiesPerPage);
-      setCities(newCities);
+      getInitialCities("");
     };
 
     getInitialData();
   }, []);
 
   useEffect(() => {
-    const getNewCities = async () => {
-      if (selectedCountry === "") {
-        const newCities = await fetchCities(null, 0, citiesPerPage);
-        setCities(newCities);
-      } else {
-        const newCities = await fetchCities(selectedCountry, 0, citiesPerPage);
-
-        setCities(newCities);
-      }
-    };
-
-    getNewCities();
+    getInitialCities(selectedCountry);
   }, [selectedCountry]);
 
-  const handleOnAllCitiesClick = async () => {
-    setCities([]);
-
-    setSelectedCountry("");
+  const getInitialCities = async (country?: string) => {
+    const newCities = await fetchCities(
+      country ?? null,
+      FIRST_CITY_INDEX,
+      CITIES_PER_PAGE
+    );
+    setCities(newCities);
   };
 
-  const handleOnCountryClick = (country: string) => {
+  const handleButtonClick = (country?: string) => {
     setCities([]);
-
-    setSelectedCountry(country);
+    setSelectedCountry(country ?? "");
   };
 
   const handleTableScroll = async (e: UIEvent<HTMLDivElement>) => {
@@ -66,26 +57,21 @@ const App = () => {
 
     if (!isScrollAtBottom) return;
 
-    let newCities: [];
+    const newCities = await fetchCities(
+      selectedCountry ?? null,
+      cities?.length,
+      CITIES_PER_PAGE,
+      searchText ?? undefined
+    );
 
-    if (selectedCountry === "") {
-      newCities = await fetchCities(null, cities?.length, citiesPerPage);
-    } else {
-      newCities = await fetchCities(
-        selectedCountry,
-        cities?.length,
-        citiesPerPage,
-        searchText
-      );
-    }
     setCities((cities) => (cities ? [...cities, ...newCities] : cities));
   };
 
   const searchCity = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const newCities = await fetchCities(
       selectedCountry ?? null,
-      0,
-      citiesPerPage,
+      FIRST_CITY_INDEX,
+      CITIES_PER_PAGE,
       e.target.value
     );
 
@@ -96,16 +82,21 @@ const App = () => {
   return (
     <div className="app">
       <h2>Cities App</h2>
-      <input type="text" onChange={searchCity} />
+      <div className="searcher">
+        <p>Search a city:</p>
+        <input type="text" onChange={searchCity} />
+      </div>
       <div className="lists">
         <Sidebar>
-          <button onClick={handleOnAllCitiesClick}>All cities</button>
+          <button onClick={() => handleButtonClick(undefined)}>
+            All cities
+          </button>
           {countries?.map((country) => (
             <Country
               key={country.name}
               name={country.name}
               citiesNumber={country.count}
-              onClick={() => handleOnCountryClick(country.name)}
+              onClick={() => handleButtonClick(country.name)}
               isSelected={country.name === selectedCountry}
             />
           ))}

@@ -13,6 +13,12 @@
   justify-content: space-around;
 }
 
+.searcher {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
 .button {
   cursor: pointer;
 }
