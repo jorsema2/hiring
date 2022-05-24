@@ -4,10 +4,10 @@ import App from "./App";
 import generateCountriesMother from "./test/mothers/generateCountriesMother";
 import generateCitiesMother from "./test/mothers/generateCitiesMother";
 import fetchCountries from "./services/fetchCountries";
-import fetchCountryCities from "./services/fetchCountryCities";
+import fetchCities from "./services/fetchCities";
 
 jest.mock("./services/fetchCountries");
-jest.mock("./services/fetchCountryCities");
+jest.mock("./services/fetchCities");
 
 const COUNTRIES = generateCountriesMother();
 const CITIES = generateCitiesMother();
@@ -34,7 +34,7 @@ describe("App", () => {
 
   it("country changes background color when it is clicked and fetcbes cities of that country", async () => {
     fetchCountries.mockResolvedValue(COUNTRIES);
-    fetchCountryCities.mockResolvedValue(CITIES);
+    fetchCities.mockResolvedValue(CITIES);
 
     render(<App />);
 

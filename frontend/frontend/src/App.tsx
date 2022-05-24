@@ -3,7 +3,7 @@ import CitiesTable from "./components/CitiesTable/CitiesTable";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Country from "./components/Country/Country";
 import fetchCountries from "./services/fetchCountries";
-import fetchCities from "./services/fetchCountryCities";
+import fetchCities from "./services/fetchCities";
 import React, { useState, useEffect, UIEvent } from "react";
 import CityProps from "./types/types";
 

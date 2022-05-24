@@ -1,4 +1,4 @@
-const fetchCountryCities = (
+const fetchCities = (
   country: string | null,
   lastCityIndex: number = 0,
   citiesPerPage: number,
@@ -18,4 +18,4 @@ const fetchCountryCities = (
   return data;
 };
 
-export default fetchCountryCities;
+export default fetchCities;
