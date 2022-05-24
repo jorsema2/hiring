@@ -4,9 +4,10 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Country from "./components/Country/Country";
 import fetchCountries from "./services/fetchCountries";
 import fetchCountryCities from "./services/fetchCountryCities";
-import { useState, useEffect, UIEvent } from "react";
+import React, { useState, useEffect, UIEvent } from "react";
 import fetchUnfilteredCities from "./services/fetchUnfilteredCities";
 import CityProps from "./types/types";
+import { debounce } from "lodash";
 
 type CountryProps = {
   name: string;
@@ -19,6 +20,7 @@ const App = () => {
   const [countries, setCountries] = useState<CountryProps[] | null>([]);
   const [cities, setCities] = useState<CityProps[] | null>([]);
   const [selectedCountry, setSelectedCountry] = useState<string>("");
+  const [searchText, setSearchText] = useState<string>("");
 
   useEffect(() => {
     const getInitialData = async () => {
@@ -78,15 +80,32 @@ const App = () => {
       newCities = await fetchCountryCities(
         selectedCountry,
         cities?.length,
-        citiesPerPage
+        citiesPerPage,
+        searchText
       );
     }
     setCities((cities) => (cities ? [...cities, ...newCities] : cities));
   };
 
+  const searchCity = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newCities = await debounce(
+      await fetchCountryCities(
+        selectedCountry,
+        0,
+        citiesPerPage,
+        e.target.value
+      ),
+      200
+    );
+
+    setSearchText(e.target.value);
+    setCities(newCities);
+  };
+
   return (
     <div className="app">
       <h2>Cities App</h2>
+      <input type="text" onChange={searchCity} />
       <div className="lists">
         <Sidebar>
           <button onClick={handleOnAllCitiesClick}>All cities</button>
