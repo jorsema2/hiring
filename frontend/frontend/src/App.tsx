@@ -88,7 +88,7 @@ const App = () => {
 
   const searchCity = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const newCities = await fetchCountryCities(
-      selectedCountry,
+      selectedCountry ?? null,
       0,
       citiesPerPage,
       e.target.value

@@ -1,11 +1,13 @@
 const fetchCountryCities = (
-  country: string,
+  country: string | null,
   lastCityIndex: number = 0,
   citiesPerPage: number,
   searchText?: string
 ) => {
   const data = fetch(
-    `http://localhost:3001/api/cities?country=${country}&from=${lastCityIndex}&limit=${citiesPerPage}${
+    `http://localhost:3001/api/cities?${
+      country ? `country=${country}` : ""
+    }&from=${lastCityIndex}&limit=${citiesPerPage}${
       searchText ? `&search=${searchText}` : ""
     }`
   )
